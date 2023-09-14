@@ -36,9 +36,20 @@ return [
     */
 
     'guards' => [
+        /**
+         * Web guard will be used for Ecommerce Customers Login
+         */
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+        ],
+
+        /**
+         * Admin guard will be used for Admin Login
+         */
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
         ],
     ],
 
@@ -60,15 +71,21 @@ return [
     */
 
     'providers' => [
+        /**
+         * User provider will be used for Ecommerce Customers Login
+         */
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        /**
+         * Admin provider will be used for Admin Login
+         */
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
     ],
 
     /*
@@ -91,9 +108,23 @@ return [
     */
 
     'passwords' => [
+        /**
+         * Password resetter will be used for Ecommerce Customers Password Reset
+         */
         'users' => [
             'provider' => 'users',
             'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        /**
+         * Password resetter will be used for Admin Password Reset
+         */
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_reset_tokens',
+            'route' => 'admin.password.reset',
             'expire' => 60,
             'throttle' => 60,
         ],
