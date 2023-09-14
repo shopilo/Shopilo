@@ -182,7 +182,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'Example' => App\Facades\Example::class,
+        'AdminMenu' => App\Libraries\AdminMenu\AdminMenu::class,
     ])->toArray(),
 
 ];

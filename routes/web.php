@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    dd((new \AdminMenu())->get('admin'));
     return view('welcome');
 });
 

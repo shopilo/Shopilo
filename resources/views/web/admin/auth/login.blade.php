@@ -1,47 +1,70 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('admin.login') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('admin.password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('admin.password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ml-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
+<x-guest-layout :admin="true" :title="__('Login')">
+    <div>
+        <h5 class="text-primary">{{ __('Welcome Back') }}</h5>
+        <p class="text-muted">{{ __('Sign in to continue to :app', ['app' => config('app.name')]) }}</p>
+    </div>
+    <div class="mt-4">
+        <!-- Session Status -->
+        <x-auth-session-status class="mb-4" :status="session('status')" />
+        <form method="POST" action="{{ route('admin.login') }}">
+            @csrf
+            <div class="mb-3">
+                <label for="email" class="form-label">{{ __('Email') }}</label>
+                <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email"
+                    placeholder="{{ __('Enter email') }}" value="{{ old('email') }}" />
+                @error('email') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+            <div class="mb-3">
+                @if (Route::has('admin.password.request'))
+                <div class="float-end">
+                    <a href="{{ route('admin.password.request') }}" class="text-muted">
+                        {{ __('Forgot your password?') }}
+                    </a>
+                </div>
+                @endif
+                <label class="form-label" for="password-input">{{ __('Password') }}</label>
+                <div class="position-relative auth-pass-inputgroup mb-3">
+                    <input type="password"
+                        class="form-control @error('password') is-invalid @enderror pe-5 password-input" name="password"
+                        id="password-input" placeholder="{{ __('Enter password') }}" />
+                    <button
+                        class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
+                        type="button" id="password-addon">
+                        <i class="ri-eye-fill align-middle"></i>
+                    </button>
+                    @error('password') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="auth-remember-check" name="remember">
+                <label class="form-check-label" for="auth-remember-check">
+                    {{ __('Remember me') }}
+                </label>
+            </div>
+            <div class="mt-4">
+                <button class="btn btn-primary w-100" type="submit">
+                    {{ __('Login') }}
+                </button>
+            </div>
+            <div class="mt-4 text-center">
+                <div class="signin-other-title">
+                    <h5 class="fs-13 mb-4 title">{{ __('Or Sign in with') }}</h5>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary btn-icon waves-effect waves-light">
+                        <i class="ri-facebook-fill fs-16"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger btn-icon waves-effect waves-light">
+                        <i class="ri-google-fill fs-16"></i>
+                    </button>
+                    <button type="button" class="btn btn-dark btn-icon waves-effect waves-light">
+                        <i class="ri-github-fill fs-16"></i>
+                    </button>
+                    <button type="button" class="btn btn-info btn-icon waves-effect waves-light">
+                        <i class="ri-twitter-fill fs-16"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
 </x-guest-layout>

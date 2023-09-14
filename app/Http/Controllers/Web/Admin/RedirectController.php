@@ -13,6 +13,11 @@ class RedirectController extends Controller
      */
     public function __invoke(Request $request)
     {
-        Auth::guard('admin')->logout();
+        $admin = Auth::guard('admin')->user();
+
+        // TODO: Check if user is not admin. And redirect also check if 
+        //      logged in user is has permission to access admin panel.
+
+        return redirect()->route('admin.dashboard');
     }
 }

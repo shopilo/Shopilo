@@ -74,7 +74,7 @@ class RouteServiceProvider extends ServiceProvider
                         'web',
                         'auth:admin',
                         'verified:admin.verification.notice',
-                        'password.confirm'
+                        'password.confirm:admin.password.confirm'
                     ])->group(base_path('routes/admin/web.php'));
                 });
         });
