@@ -21,7 +21,7 @@ Shopilo is a free and open-source E-commerce CMS built using Laravel. Whether yo
     - [ ] Order Management
     `And many more in the near future`
 
-We are using Laravel [Jetstream](https://jetstream.laravel.com) with Laravel [Breeze](https://laravel.com/docs/breeze) for authentication. We planned to add Breeze Authenticaion and over Fortify to make authentication more customizable. Laravel [Livewire](https://laravel-livewire.com) will be a key part of Shopilo. We are also planning to use [Inertia](https://inertiajs.com) in the future for adding support for Website Frontend. We will not remove [Tailwind CSS](https://tailwindcss.com) support, so you can use Tailwind CSS on your frontend.
+We are using Laravel [Breeze](https://laravel.com/docs/breeze) for authentication. We planned to add Breeze Authenticaion and over Fortify to make authentication more customizable. Laravel [Livewire](https://laravel-livewire.com) will be a key part of Shopilo. We are also planning to use [Inertia](https://inertiajs.com) in the future for adding support for Website Frontend. We will not remove [Tailwind CSS](https://tailwindcss.com) support, so you can use Tailwind CSS on your frontend.
 
 ## Contributing to Shopilo
 
